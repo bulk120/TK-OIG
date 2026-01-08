@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK-OIG | Manufacturing Enterprise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: #1e3a5c;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #4CAF50;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #2c5282;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        main {
+            min-height: 70vh;
+            padding: 40px 0;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1e3a5c;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: #4CAF50;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Home Page */
+        .hero {
+            background: linear-gradient(rgba(30, 58, 92, 0.8), rgba(30, 58, 92, 0.9)), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #3d8b40;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #1e3a5c;
+            margin-bottom: 15px;
+        }
+        
+        /* About Page */
+        .about-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        .about-section {
+            margin-bottom: 30px;
+        }
+        
+        .about-section h3 {
+            color: #1e3a5c;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .registration-details {
+            background-color: #f0f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #1e3a5c;
+            margin-top: 20px;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            min-width: 250px;
+            color: #1e3a5c;
+        }
+        
+        /* Contact Page */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .contact-info {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            background-color: #e8f4ff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #1e3a5c;
+            font-size: 1.2rem;
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #1e3a5c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #2c5282;
+        }
+        
+        /* Privacy Policy Page */
+        .privacy-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .privacy-section {
+            margin-bottom: 30px;
+        }
+        
+        .privacy-section h3 {
+            color: #1e3a5c;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: #4CAF50;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #4CAF50;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+            
+            .mobile-nav {
+                display: none;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            .mobile-nav.active {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+            }
+            
+            .detail-label {
+                min-width: auto;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-industry"></i>
+                <h1>TK<span>-OIG</span></h1>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="mobile-nav" id="mobileNav">
+                <ul>
+                    <li><a href="#home" class="active" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#about" onclick="showPage('about')">About Us</a></li>
+                    <li><a href="#contact" onclick="showPage('contact')">Contact Us</a></li>
+                    <li><a href="#privacy" onclick="showPage('privacy')">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home-page" class="page">
+            <div class="hero">
+                <h2>Manufacturing Excellence Since 2015</h2>
+                <p>TK-OIG is a registered MSME enterprise specializing in the manufacture of starch products, glucose, and glucose syrup. We are committed to quality, innovation, and sustainable manufacturing practices.</p>
+                <a href="#about" class="cta-button" onclick="showPage('about')">Learn More About Us</a>
+            </div>
+            
+            <h2 class="page-title">Why Choose TK-OIG</h2>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Udyam Registered</h3>
+                    <p>Officially registered as a Micro Enterprise under the MSME Ministry, Government of India (Udyam-JH-24-0021879).</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>Specialized Manufacturing</h3>
+                    <p>We specialize in the manufacture of starches, glucose, glucose syrup, maltose and related food products.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Quality Assurance</h3>
+                    <p>Committed to maintaining the highest quality standards in all our manufacturing processes and products.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Us Page -->
+        <section id="about-page" class="page" style="display: none;">
+            <h2 class="page-title">About TK-OIG</h2>
+            
+            <div class="about-content">
+                <div class="about-section">
+                    <h3>Our Company</h3>
+                    <p>TK-OIG is a manufacturing enterprise based in Jamshedpur, Jharkhand, specializing in food products. Established in 2015, we have grown to become a recognized player in the starch products manufacturing sector.</p>
+                    <p>We are registered as a Micro Enterprise under the Udyam Registration scheme of the Ministry of Micro, Small and Medium Enterprises (MSME), Government of India.</p>
+                </div>
+                
+                <div class="about-section">
+                    <h3>Our Mission</h3>
+                    <p>To produce high-quality starch products and glucose derivatives that meet the evolving needs of the food industry while maintaining sustainable and ethical manufacturing practices.</p>
+                </div>
+                
+                <div class="about-section">
+                    <h3>Udyam Registration Details</h3>
+                    <div class="registration-details">
+                        <div class="detail-row">
+                            <div class="detail-label">Udyam Registration Number:</div>
+                            <div class="detail-value">UDYAM-JH-24-0021879</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Enterprise Name:</div>
+                            <div class="detail-value">TK-OIG</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Enterprise Type:</div>
+                            <div class="detail-value">Micro Enterprise</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Major Activity:</div>
+                            <div class="detail-value">Manufacturing</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Date of Registration:</div>
+                            <div class="detail-value">08/01/2026</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Date of Incorporation:</div>
+                            <div class="detail-value">01/03/2015</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Business Commencement:</div>
+                            <div class="detail-value">01/05/2015</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">NIC Code:</div>
+                            <div class="detail-value">10623 - Manufacture of glucose, glucose syrup, maltose etc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Us Page -->
+        <section id="contact-page" class="page" style="display: none;">
+            <h2 class="page-title">Contact Us</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>We'd love to hear from you. Reach out to us for business inquiries, product information, or any other questions.</p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Address</h4>
+                            <p>Flat/Door/Block No. 53, HEERA Building<br>
+                            Basti, Block 3, Jamshedpur, Burma Mines<br>
+                            West Singhbhum, Jharkhand 831007</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 6358317824</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>tarun.kumar@amns.in</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <h4>MSME Support</h4>
+                            <p>District Industries Centre: WEST SINGHBHUM (JHARKHAND)<br>
+                            MSME-DFO: RANCHI (JHARKHAND)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Privacy Policy Page -->
+        <section id="privacy-page" class="page" style="display: none;">
+            <h2 class="page-title">Privacy Policy</h2>
+            
+            <div class="privacy-content">
+                <div class="privacy-section">
+                    <h3>Introduction</h3>
+                    <p>TK-OIG ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>Information We Collect</h3>
+                    <p>We may collect personal information that you voluntarily provide to us when you contact us through our website, including your name, email address, phone number, and any other information you choose to provide.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>How We Use Your Information</h3>
+                    <p>We use the information we collect to:</p>
+                    <ul>
+                        <li>Respond to your inquiries and provide customer support</li>
+                        <li>Send you information about our products and services</li>
+                        <li>Improve our website and services</li>
+                        <li>Comply with legal obligations</li>
+                    </ul>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>Information Sharing</h3>
+                    <p>We do not sell, trade, or rent your personal information to third parties. We may share information with government authorities as required by law, including for Udyam registration compliance.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>Data Security</h3>
+                    <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>Contact Us</h3>
+                    <p>If you have questions about this Privacy Policy, please contact us at:</p>
+                    <p>Email: tarun.kumar@amns.in<br>
+                    Phone: +91 6358317824<br>
+                    Address: Flat/Door/Block No. 53, HEERA Building, Basti, Block 3, Jamshedpur, Burma Mines, West Singhbhum, Jharkhand 831007</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>Changes to This Policy</h3>
+                    <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TK-OIG</h3>
+                    <p>A registered MSME enterprise specializing in manufacturing starch products, glucose, and glucose syrup since 2015.</p>
+                    <p>Udyam Registration: UDYAM-JH-24-0021879</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#about" onclick="showPage('about')">About Us</a></li>
+                        <li><a href="#contact" onclick="showPage('contact')">Contact Us</a></li>
+                        <li><a href="#privacy" onclick="showPage('privacy')">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> West Singhbhum, Jharkhand 831007</li>
+                        <li><i class="fas fa-phone"></i> +91 6358317824</li>
+                        <li><i class="fas fa-envelope"></i> tarun.kumar@amns.in</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>MSME Resources</h3>
+                    <ul>
+                        <li><a href="https://udyamregistration.gov.in" target="_blank">Udyam Registration Portal</a></li>
+                        <li><a href="https://www.msme.gov.in" target="_blank">MSME Ministry</a></li>
+                        <li><a href="https://www.dcmsme.gov.in" target="_blank">DC MSME</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 TK-OIG. All rights reserved. | Udyam Registration Certificate Printed: 08/01/2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show the selected page
+            document.getElementById(pageId + '-page').style.display = 'block';
+            
+            // Update active navigation link
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the clicked link
+            document.querySelectorAll('nav a').forEach(link => {
+                if (link.getAttribute('href') === '#' + pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu if open
+            document.getElementById('mobileNav').classList.remove('active');
+            
+            // Scroll to top of page
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        });
+        
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // In a real implementation, you would send this data to a server
+            // For this example, we'll just show an alert
+            alert(`Thank you ${name}! Your message has been received. We will contact you at ${email} shortly.`);
+            
+            // Reset the form
+            document.getElementById('contactForm').reset();
+        });
+        
+        // Initialize the page with Home as default
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
